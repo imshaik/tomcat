@@ -46,7 +46,7 @@ try {
 
 	stage('Build the artifact with pom.xml')
         {
-            Docker.mavenbuild(mavenimage, clean:package);
+            Docker.mavenbuild(mavenimage, "clean:package");
         }
 
         stage('Check if dockerfile is exist or not')
