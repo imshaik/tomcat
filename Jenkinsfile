@@ -46,8 +46,26 @@ try {
 
 	stage('Build the artifact with pom.xml')
         {
-            Docker.mavenbuild(mavenimage, "package");
+            Docker.mavenbuild(mavenimage, 
+		"package",
+		/*" -DbambooPlanRepositoryBranch=${env.BRANCH_NAME}" +
+ 		" -DbaimbooBuildNumber=${env.BUILD_NUMBER}" +
+ 		" -Dgit.branch=${env.BRANCH_NAME}" +
+ 		" -Dgit.commit=${gitCommit}" +
+ 		" -Dbuild.label=${env.BRANCH_NAME}-B${env.BUILD_NUMBER}",*/
+ 		"**/target/surefire-reports/*.xml"
+		);
         }
+
+	/*stage('Sonar Analysis') {
+		Docker.sonar(sonarMaven,
+			dockerOpts,
+			"sonar:sonar",
+			" -Dbuild.label=${projDtrRepo}:${buildLabel}" +
+			" -DbambooPlanRepositoryBranch=${env.BRANCH_NAME}" +
+			" -DbambooBuildNumber=${env.BUILD_NUMBER}"
+		)
+	}*/
 
         stage('Check if dockerfile is exist or not')
         {
