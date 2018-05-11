@@ -6,7 +6,7 @@ FROM tomcat:latest
 
 #copy httpd.sh script from local to container
 
-COPY imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
+COPY ../target/imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
 
 WORKDIR /usr/local/tomcat/
 
@@ -21,5 +21,5 @@ WORKDIR /usr/local/tomcat/
 #CMD [ "-c", "/usr/sbin/httpd -k start;bash" ]
 
 # Expose default port
-#EXPOSE 80
+EXPOSE 8080
 
