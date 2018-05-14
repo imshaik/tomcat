@@ -28,6 +28,7 @@ try {
                 def dockerurl      = "https://hub.docker.com/r/shaikimranashrafi/${dockerreponame}"
                 def buildlabel     = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
 		def mavenimage     = docker.image("shaikimranashrafi/maven:3.2.5")
+		def sonarimage     = docker.image("sonarqube")
 
         stage('Clean workspace')
         {
@@ -57,15 +58,14 @@ try {
 		);
         }
 
-	/*stage('Sonar Analysis') {
-		Docker.sonar(sonarMaven,
-			dockerOpts,
-			"sonar:sonar",
-			" -Dbuild.label=${projDtrRepo}:${buildLabel}" +
+	stage('Sonarqube Analysis') {
+		Docker.sonar(sonarimage,
+			"sonar:sonar"
+		     /*	" -Dbuild.label=${projDtrRepo}:${buildLabel}" +
 			" -DbambooPlanRepositoryBranch=${env.BRANCH_NAME}" +
-			" -DbambooBuildNumber=${env.BUILD_NUMBER}"
-		)
-	}*/
+			" -DbambooBuildNumber=${env.BUILD_NUMBER}" */
+		);
+	}
 
         stage('Check if dockerfile is exist or not')
         {

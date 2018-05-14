@@ -19,11 +19,12 @@
   </dependencies>
 
   <build>
+    <finalName>imran</finalName>
     <plugins>
-     <!--
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
+	<!--
         <version>3.0</version>
         <configuration>
           <source>${compiler.version}</source>
@@ -33,12 +34,58 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
+	<!--
         <version>2.3</version>
         <configuration>
 	  <failOnMissingWebXml>false</failOnMissingWebXml>
           <warName>${artifactId}</warName>
-        </configuration>
+        </configuration> -->
       </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+	<artifactId>maven-deploy-plugin</artifactId>	
+      </plugin>
+      <!--
+      <plugin>
+        <groupId>com.spotify</groupId>
+	<artifactId>docker-maven-plugin</artifactId>
+	<configuration>
+	  <image>${docker.image.name}</image>
+	  <imageName>${docker.image.name}</imageName>
+	  <newName>${docker.image.name}:${bambooPlanRepositoryBranch}-B${bambooBuildNumber}</newName>
+	  <dockerDirectory>docker</dockerDirectory>
+	  <resources>
+	    <resource>
+	    <targetPath>/</targetPath>
+	    <directory>${project.build.directory}</directory>
+	    <include>${project.build.finalName}.war</include>
+	    </resource>
+	  </resources>
+	</configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.jacoco</groupId>
+	<artifactId>jacoco-maven-plugin</artifactId>
+	<version>0.7.7.201606060606</version>
+	<configuration>
+	  <append>true</append>
+	</configuration>
+	<executions>
+	  <execution>
+	    <id>default-prepare-agent</id>
+	    <goals>
+	      <goal>prepare-agent</goal>
+	    </goals>
+	  </execution>
+	  <execution>
+	    <id>default-report</id>
+	    <phase>prepare-package</phase>
+	    <goals>
+	      <goal>report</goal>
+	    </goals>
+	  </execution>
+	</executions>
+      </plugin> -->
     </plugins>
   </build>
 </project>
