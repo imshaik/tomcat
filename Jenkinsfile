@@ -28,7 +28,7 @@ try {
                 def dockerurl      = "https://hub.docker.com/r/shaikimranashrafi/${dockerreponame}"
                 def buildlabel     = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
 		def mavenimage     = docker.image("shaikimranashrafi/maven:3.2.5")
-		def sonarimage     = docker.image("sonarqube")
+		def sonarimage     = docker.image("shaikimranashrafi/sonarqube:latest")
 
         stage('Clean workspace')
         {
