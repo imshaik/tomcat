@@ -11,6 +11,13 @@ import java.net.URL*/
 import com.imran.jenkins.GitPipelineSteps
 import com.imran.jenkins.DockerPipelineSteps
 
+
+properties([
+      //buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '1'))
+      buildDiscarder(logRotator(artifactNumToKeepStr: '1'))
+      //pipelineTriggers([[$class:"SCMTrigger", scmpoll_spec:"H/15 * * * *"]]),
+        ])
+
 try {
     //agent { label 'docker' } we can use this as well
     node('Docker')
@@ -37,10 +44,14 @@ try {
             deleteDir()
         }
 	
-	stage('Discard old builds')
+      /*stage('Discard old builds')
 	{
-	  options { buildDiscarder(logRotator(numToKeepStr: '1')) }
-	}
+	  //options { buildDiscarder(logRotator(numToKeepStr: '1')) }
+	  properties([
+    		buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5')),
+    		pipelineTriggers([[$class:"SCMTrigger", scmpoll_spec:"H/15 * * * *"]]),
+	])
+	}*/
 
         stage('Clone repository')
 	{
