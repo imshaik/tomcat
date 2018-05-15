@@ -36,6 +36,11 @@ try {
         */
             deleteDir()
         }
+	
+	stage('Discard old builds')
+	{
+	  options { buildDiscarder(logRotator(numToKeepStr: '1')) }
+	}
 
         stage('Clone repository')
 	{
