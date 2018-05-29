@@ -26,7 +26,7 @@ try {
             echo "Branch selected is: ${env.BRANCH_NAME}"
             echo "Build number is: ${env.BUILD_NUMBER}"
 
-                def git            = new GitPipelineSteps(steps);
+                def Git            = new GitPipelineSteps(steps);
                 def Docker         = new DockerPipelineSteps(steps);
 
                 def reponame       = "tomcat"
@@ -35,7 +35,7 @@ try {
                 def dockerurl      = "https://hub.docker.com/r/shaikimranashrafi/${dockerreponame}"
                 def buildlabel     = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
 		def mavenimage     = docker.image("shaikimranashrafi/maven:3.2.5")
-		//def sonarimage     = docker.image("shaikimranashrafi/sonarqube:latest")
+		//def sonarimage   = docker.image("shaikimranashrafi/sonarqube:latest")
 
         stage('Clean workspace')
         {
@@ -43,28 +43,19 @@ try {
         */
             deleteDir()
         }
-	
-      /*stage('Discard old builds')
-	{
-	  //options { buildDiscarder(logRotator(numToKeepStr: '1')) }
-	  properties([
-    		buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '5')),
-    		pipelineTriggers([[$class:"SCMTrigger", scmpoll_spec:"H/15 * * * *"]]),
-	])
-	}*/
 
         stage('Clone repository')
 	{
            // git branch: "${env.BRANCH_NAME}", credentialsId: 'Github', url: "https://github.com/imshaik/${reponame}.git"
 
-                git.checkout(githuburl, env.BRANCH_NAME);
+                Git.checkout(githuburl, env.BRANCH_NAME);
                 gitHead = git.commit();
         }
 
 	stage('Build the artifact with pom.xml')
         {
             Docker.mavenbuild(mavenimage, 
-		"package",
+		"clean verify package",
 		/*" -DbambooPlanRepositoryBranch=${env.BRANCH_NAME}" +
  		" -DbaimbooBuildNumber=${env.BUILD_NUMBER}" +
  		" -Dgit.branch=${env.BRANCH_NAME}" +
@@ -80,7 +71,7 @@ try {
 		     /*	" -Dbuild.label=${projDtrRepo}:${buildLabel}" +
 			" -DbambooPlanRepositoryBranch=${env.BRANCH_NAME}" +
 			" -DbambooBuildNumber=${env.BUILD_NUMBER}" */
-		);
+		        );
 	}
 
         stage('Check if dockerfile is exist or not')
