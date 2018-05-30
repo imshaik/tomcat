@@ -34,7 +34,7 @@ try {
                 def githuburl      = "https://github.com/imshaik/${reponame}.git"
                 def dockerurl      = "https://hub.docker.com/r/shaikimranashrafi/${dockerreponame}"
                 def buildlabel     = "${env.BRANCH_NAME}-${env.BUILD_NUMBER}"
-		def mavenimage     = docker.image("shaikimranashrafi/maven:3.2.5")
+		def mavenimage     = docker.image("shaikimranashrafi/maven:latest")
 		//def sonarimage   = docker.image("shaikimranashrafi/sonarqube:latest")
 
         stage('Clean workspace')
