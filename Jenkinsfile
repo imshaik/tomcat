@@ -49,7 +49,7 @@ try {
            // git branch: "${env.BRANCH_NAME}", credentialsId: 'Github', url: "https://github.com/imshaik/${reponame}.git"
 
                 Git.checkout(githuburl, env.BRANCH_NAME);
-                gitHead = git.commit();
+                gitHead = Git.commit();
         }
 
 	stage('Build the artifact with pom.xml')
