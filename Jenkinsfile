@@ -54,7 +54,7 @@ try {
 
 	stage('Build the artifact with pom.xml')
         {
-            Docker.mavenbuild(mavenimage, 
+            Docker.mavenbuild( 
 		"clean verify package",
 		/*" -DbambooPlanRepositoryBranch=${env.BRANCH_NAME}" +
  		" -DbaimbooBuildNumber=${env.BUILD_NUMBER}" +
@@ -66,7 +66,7 @@ try {
         }
 
 	stage('Sonarqube Analysis') {
-		Docker.sonar(mavenimage,
+		Docker.sonar(
 			"sonar:sonar"
 		     /*	" -Dbuild.label=${projDtrRepo}:${buildLabel}" +
 			" -DbambooPlanRepositoryBranch=${env.BRANCH_NAME}" +
