@@ -80,13 +80,14 @@ try {
         }
         stage ('Build Docker image and push to docker Hub')
         {
-            dir('docker') {
+            //dir('docker') {
 
-                def dockerimage = docker.build("shaikimranashrafi/${dockerreponame}:${buildlabel}").push()
+               // def dockerimage = docker.build("shaikimranashrafi/${dockerreponame}:${buildlabel}").push()
+		def dockerimage = docker.build('docker', 'shaikimranashrafi/${dockerreponame}:${buildlabel}').push()
                  /* We can also push the image with passing tag name
                 dockerimage.push('latest') */
 
-                        }
+                      //  }
         }
 
         /*stage ('Run the test on dockerfile')
