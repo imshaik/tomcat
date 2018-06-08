@@ -6,7 +6,7 @@ FROM tomcat:latest
 
 #copy httpd.sh script from local to container
 
-COPY ../target/imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
+COPY imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
 
 WORKDIR /usr/local/tomcat/
 
