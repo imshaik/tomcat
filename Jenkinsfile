@@ -83,11 +83,11 @@ try {
             //dir('docker') {
 
                // def dockerimage = docker.build("shaikimranashrafi/${dockerreponame}:${buildlabel}").push()
-		def dockerimage = docker.build('docker', 'shaikimranashrafi/${dockerreponame}:${buildlabel}').push()
+		def dockerimage = docker.build("shaikimranashrafi/${dockerreponame}:${buildlabel}", "./docker").push()
                  /* We can also push the image with passing tag name
                 dockerimage.push('latest') */
 
-                      //  }
+                      // }
         }
 
         /*stage ('Run the test on dockerfile')
