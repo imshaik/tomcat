@@ -5,10 +5,10 @@ require 'serverspec'
     describe "test Dockerfile" do
       before(:all) do
 	#Docker.authenticate!('username' => ENV['DOCKER_USERNAME'], 'password' => ENV['DOCKER_PASSWORD'])
-        @image = Docker::Image.build_from_dir('docker')
+        #@image = Docker::Image.build_from_dir('docker')
 	#let(:image) { Docker::Image.build_from_dir('.') }
 	#@imageid = %x( docker images | grep shaikimranashrafi/httpd | awk 'NR==1{print $3;exit}' )
-	#@image = Docker::Image.get('imageid')
+	@image = Docker::Image.get('imageid')
 
         set :os, family: :RedHat
 	#set :os, family: :Linux
@@ -58,7 +58,7 @@ require 'serverspec'
         it { should be_readable.by_user('tomcat') }
      end
 
-     describe file('/usr/local/tomcat/bin/catalina.sh') do
+     describe file('/usr/local/tomcat/webapps/ROOT/WEB-INF/imran.war') do
 	it { should exist }
 	it { should be_owned_by 'tomcat' }
      end

@@ -5,6 +5,10 @@ FROM tomcat:latest
 
 COPY imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
 
+#Change the ownership of war file to tomcat
+
+RUN chown -R tomcat:tomcat /usr/local/tomcat/webapps/ROOT/WEB-INF
+
 WORKDIR /usr/local/tomcat/
 
 # Set username
