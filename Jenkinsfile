@@ -83,30 +83,31 @@ try {
             //dir('docker') {
 
                // def dockerimage = docker.build("shaikimranashrafi/${dockerreponame}:${buildlabel}").push()
-		def dockerimage = docker.build("shaikimranashrafi/${dockerreponame}:${buildlabel}", "-f docker/Dockerfile target").push()
+	def dockerimage = docker.build("shaikimranashrafi/${dockerreponame}:${buildlabel}", "-f docker/Dockerfile target").push()
                  /* We can also push the image with passing tag name
                 dockerimage.push('latest') */
 
                       // }
         }
 
-        /*stage ('Run the test on dockerfile')
+        stage ('Run the test on dockerfile')
         {
                 sh("bundle exec rake spec 2> /dev/null")
-        }*/
+        }
 
         stage('Remove local images & containers')
         {
                 /*remove docker images locally
                 echo "Removing the image shaikimranashrafi/${dockerreponame}:${buildlabel}"
                 sh("docker rmi -f shaikimranashrafi/${dockerreponame}:${buildlabel}")*/
-
+		
+		// Remove created docker image locally
                 Docker.RemoveImage(dockerreponame, buildlabel);
 
-                //remove docker images which doesnot have a name assigned
+                //Remove docker images which doesnot have a name assigned '<none>' basically
 		Docker.RemoveNoneImage();
 
-                //remove docker containers the one rakefile created
+                //Remove docker containers the one rakefile created
                 Docker.RemoveContainer();
         }
 
