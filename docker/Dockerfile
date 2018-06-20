@@ -3,7 +3,7 @@ FROM tomcat:latest2
 
 #copy artifact from workspace to container
 
-#COPY imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
+COPY imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
 
 WORKDIR /usr/local/tomcat/
 
