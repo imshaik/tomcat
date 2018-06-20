@@ -1,12 +1,9 @@
 # Set the base image
-FROM tomcat:latest
+FROM tomcat:latest2
 
-# Update application repository list
-#RUN yum install httpd -y
+#copy artifact from workspace to container
 
-#copy httpd.sh script from local to container
-
-COPY imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
+#COPY imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
 
 WORKDIR /usr/local/tomcat/
 
