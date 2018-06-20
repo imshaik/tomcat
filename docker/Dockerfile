@@ -1,5 +1,5 @@
 # Set the base image
-FROM tomcat:latest2
+FROM tomcat:latest
 
 #copy artifact from workspace to container
 
