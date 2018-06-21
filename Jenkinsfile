@@ -92,7 +92,11 @@ try {
 
         stage ('Run the test on dockerfile')
         {
-                sh("bundle exec rake spec 2> /dev/null")
+                sh '''
+			Rspec.image.id=$(docker images -q shaikimranashrafi/${dockerreponame}:${buildlabel})
+			sed -i -e 's/image.id/${Rspec.image.id}/g' ./spec/tomcat/*.rb
+			bundle exec rake spec 2> /dev/null''' 
+		//sh("bundle exec rake spec 2> /dev/null")
         }
 
         stage('Remove local images & containers')
