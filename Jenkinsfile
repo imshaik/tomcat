@@ -92,11 +92,11 @@ try {
 
         stage ('Run the test on dockerfile')
         {
-               def Rspec.image.id = sh( 
+               def imageid = sh( 
 			script: "docker images -q shaikimranashrafi/${dockerreponame}:${buildlabel}",
 			returnStdout: true
         		).trim()
-		sh("sed -i -e 's/image.id/${Rspec.image.id}/g' ./spec/tomcat/*.rb")
+		sh("sed -i -e 's/imageid/${imageid}/g' ./spec/tomcat/*.rb")
 		sh("bundle exec rake spec 2> /dev/null")
         }
 
