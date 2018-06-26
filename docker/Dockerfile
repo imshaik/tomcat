@@ -3,7 +3,7 @@ FROM tomcat:latest
 
 #copy artifact from workspace to container
 
-COPY imran.war /usr/local/tomcat/webapps/ROOT/WEB-INF
+COPY imran.war /usr/local/tomcat/webapps
 
 #Change the ownership of war file to tomcat
 
