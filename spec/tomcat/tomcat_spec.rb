@@ -58,7 +58,7 @@ require 'serverspec'
         it { should be_readable.by_user('tomcat') }
      end
 
-     describe file('/usr/local/tomcat/webapps/ROOT/WEB-INF/imran.war') do
+     describe file('/usr/local/tomcat/webapps/imran.war') do
 	it { should exist }
 	it { should be_owned_by 'tomcat' }
      end
