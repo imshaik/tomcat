@@ -7,7 +7,7 @@ COPY imran.war /usr/local/tomcat/webapps
 
 #Change the ownership of war file to tomcat
 
-RUN chown -R tomcat:tomcat /usr/local/tomcat/webapps/ROOT/WEB-INF
+RUN chown -R tomcat:tomcat /usr/local/tomcat/webapps
 
 WORKDIR /usr/local/tomcat/
 
