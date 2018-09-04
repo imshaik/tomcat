@@ -46,9 +46,9 @@ try {
 
         stage('Clone repository')
 	{
-           // git branch: "${env.BRANCH_NAME}", credentialsId: 'Github', url: "https://github.com/imshaik/${reponame}.git"
+           git branch: "${env.BRANCH_NAME}", credentialsId: 'Github', url: "https://github.com/imshaik/${reponame}.git"
 
-                Git.checkout(githuburl, env.BRANCH_NAME);
+                //Git.checkout(githuburl, env.BRANCH_NAME);
                 //gitHead = Git.commit();
         }
 
